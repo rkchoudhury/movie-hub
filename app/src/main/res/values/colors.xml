@@ -7,4 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!--  Colors used in the application -->
+    <color name="grey">#1B1C28</color>
+    <color name="white_two">#c7c9d1</color>
+    <color name="grey_two">#5d5e6a</color>
+    <color name="gold">#d8b99f</color>
 </resources>
