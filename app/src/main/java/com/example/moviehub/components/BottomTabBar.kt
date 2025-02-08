@@ -11,13 +11,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.navigation.NavController
-import com.example.moviehub.navigation.NavigationItem
-
+import com.example.moviehub.navigation.DashboardTabItem
 
 @Composable
-fun BottomTabBar(navController: NavController, navigationItems: List<NavigationItem>) {
+fun BottomTabBar(
+    navController: NavController,
+    navigationItems: List<DashboardTabItem>,
+    initialScreen: String
+) {
     var selectedItem by remember { mutableIntStateOf(0) }
-    var currentRoute by remember { mutableStateOf(NavigationItem.Home.route) }
+    var currentRoute by remember { mutableStateOf(initialScreen) }
 
     navigationItems.forEachIndexed { index, navigationItem ->
         if (navigationItem.route == currentRoute) {
@@ -29,7 +32,7 @@ fun BottomTabBar(navController: NavController, navigationItems: List<NavigationI
         navigationItems.forEachIndexed { index, item ->
             NavigationBarItem(
                 alwaysShowLabel = true,
-                icon = { Icon(item.icon!!, contentDescription = item.title) },
+                icon = { Icon(item.icon, contentDescription = item.title) },
                 label = { Text(item.title) },
                 selected = selectedItem == index,
                 onClick = {

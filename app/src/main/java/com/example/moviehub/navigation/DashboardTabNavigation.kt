@@ -9,11 +9,11 @@ import com.example.moviehub.screens.dashboard.SearchScreen
 
 @Composable
 fun DashboardTabNavigation(navController: NavHostController) {
-    NavHost(navController, startDestination = NavigationItem.Home.route) {
-        composable(NavigationItem.Home.route) {
+    NavHost(navController, startDestination = DashboardTabItem.Home.route) {
+        composable(DashboardTabItem.Home.route) {
             HomeScreen()
         }
-        composable(NavigationItem.Search.route) {
+        composable(DashboardTabItem.Search.route) {
             SearchScreen()
         }
     }

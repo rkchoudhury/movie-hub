@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.example.moviehub.components.BottomTabBar
 import com.example.moviehub.navigation.DashboardTabNavigation
-import com.example.moviehub.navigation.NavigationItem
+import com.example.moviehub.navigation.DashboardTabItem
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -17,14 +17,18 @@ fun DashboardNavigator() {
     val navController = rememberNavController()
 
     val navigationItems = listOf(
-        NavigationItem.Home,
-        NavigationItem.Search,
+        DashboardTabItem.Home,
+        DashboardTabItem.Search,
     )
 
     Scaffold(
         bottomBar = {
             BottomAppBar(modifier = Modifier) {
-                BottomTabBar(navController = navController, navigationItems = navigationItems)
+                BottomTabBar(
+                    navController = navController,
+                    navigationItems = navigationItems,
+                    DashboardTabItem.Home.route
+                )
             }
         },
     ) {
