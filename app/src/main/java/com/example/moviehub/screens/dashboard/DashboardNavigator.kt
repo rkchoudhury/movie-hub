@@ -7,8 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.example.moviehub.components.BottomTabBar
-import com.example.moviehub.navigation.DashboardTabNavigation
 import com.example.moviehub.navigation.DashboardTabItem
+import com.example.moviehub.navigation.DashboardTabNavigation
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -27,7 +27,6 @@ fun DashboardNavigator() {
                 BottomTabBar(
                     navController = navController,
                     navigationItems = navigationItems,
-                    DashboardTabItem.Home.route
                 )
             }
         },

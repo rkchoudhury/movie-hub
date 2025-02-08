@@ -5,28 +5,16 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.moviehub.navigation.DashboardTabItem
 
 @Composable
 fun BottomTabBar(
     navController: NavController,
     navigationItems: List<DashboardTabItem>,
-    initialScreen: String
 ) {
-    var selectedItem by remember { mutableIntStateOf(0) }
-    var currentRoute by remember { mutableStateOf(initialScreen) }
-
-    navigationItems.forEachIndexed { index, navigationItem ->
-        if (navigationItem.route == currentRoute) {
-            selectedItem = index
-        }
-    }
+    val backStackEntry = navController.currentBackStackEntryAsState()
 
     NavigationBar {
         navigationItems.forEachIndexed { index, item ->
@@ -34,10 +22,8 @@ fun BottomTabBar(
                 alwaysShowLabel = true,
                 icon = { Icon(item.icon, contentDescription = item.title) },
                 label = { Text(item.title) },
-                selected = selectedItem == index,
+                selected = item.route == backStackEntry.value?.destination?.route,
                 onClick = {
-                    selectedItem = index
-                    currentRoute = item.route
                     navController.navigate(item.route) {
                         navController.graph.startDestinationRoute?.let { route ->
                             popUpTo(route) {
