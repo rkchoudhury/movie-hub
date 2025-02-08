@@ -1,4 +1,4 @@
-package com.example.moviehub.screens
+package com.example.moviehub.screens.profile_selection
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
@@ -12,7 +12,7 @@ import androidx.navigation.compose.rememberNavController
 fun ProfileSelectionScreen(navController: NavController) {
     Column {
         Text(text = "Choose a profile to begin")
-        Button(onClick = { navController.navigate(route = "Home") }) {
+        Button(onClick = { navController.navigate(route = "Dashboard") }) {
             Text(text = "Home")
         }
     }

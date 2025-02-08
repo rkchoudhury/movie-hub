@@ -1,4 +1,4 @@
-package com.example.moviehub.screens
+package com.example.moviehub.screens.dashboard
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
@@ -6,14 +6,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun HomeScreen() {
+fun SearchScreen() {
     Column {
-        Text(text = "Home Screen")
+        Text(text = "Search Screen")
     }
 }
 
 @Preview
 @Composable
-fun HomeScreenPreview() {
-    HomeScreen()
+fun SearchScreenPreview() {
+    SearchScreen()
 }
