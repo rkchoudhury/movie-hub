@@ -65,4 +65,7 @@ dependencies {
 
     // JSON to Kotlin object mapping
     implementation(libs.converter.gson)
+
+    // External Image Loading
+    implementation("io.coil-kt:coil-compose:2.4.0")
 }
