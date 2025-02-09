@@ -59,4 +59,10 @@ dependencies {
 
     // Navigation Dependency
     implementation(libs.androidx.navigation.compose)
+
+    // Network Call
+    implementation(libs.retrofit)
+
+    // JSON to Kotlin object mapping
+    implementation(libs.converter.gson)
 }
