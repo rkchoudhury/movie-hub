@@ -2,6 +2,7 @@ package com.example.moviehub.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,13 +23,18 @@ import androidx.compose.ui.unit.sp
 import com.example.moviehub.R
 
 @Composable
-fun ProfileCard(name: String, type: String) {
+fun ProfileCard(name: String, type: String, onPressCard: () -> Unit = {}) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 0.dp, vertical = 10.dp)
-            .border(width = 2.dp, color = colorResource(R.color.black_two), shape = RoundedCornerShape(20.dp))
+            .border(
+                width = 2.dp,
+                color = colorResource(R.color.black_two),
+                shape = RoundedCornerShape(20.dp)
+            )
             .padding(24.dp)
+            .clickable { onPressCard() },
     ) {
         Text(
             text = name[0].toString(),
@@ -69,6 +75,6 @@ fun ProfileCard(name: String, type: String) {
 @Preview(showSystemUi = false)
 @Composable
 fun ProfileCardPreview() {
-    ProfileCard("Rakesh", "Adult")
+    ProfileCard("Rakesh", "Adult", {})
 }
 

@@ -37,8 +37,10 @@ fun ProfileSelectionScreen(navController: NavController) {
         LazyColumn(
             modifier = Modifier.weight(1f)
         ) {
-            items(listOf(1)) { item ->
-                ProfileCard("Rakesh", "Adult")
+            items(listOf("Rakesh", "Abinash", "Shubha")) { item ->
+                ProfileCard(item, "Adult", onPressCard = {
+                    navController.navigate(route = Route.Dashboard.name)
+                })
             }
         }
         ProfileScreenFooter(navController)
