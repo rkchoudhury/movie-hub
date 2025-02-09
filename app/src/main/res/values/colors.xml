@@ -14,4 +14,6 @@
     <color name="grey_two">#5d5e6a</color>
     <color name="gold">#d8b99f</color>
     <color name="black_two">#343739</color>
+    <color name="button_primary">#394c5e</color>
+    <color name="button_primary_text">#acb7c5</color>
 </resources>

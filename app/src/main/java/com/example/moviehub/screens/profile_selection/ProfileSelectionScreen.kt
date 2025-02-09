@@ -7,12 +7,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.moviehub.R
+import com.example.moviehub.components.CustomButton
 import com.example.moviehub.components.ProfileCard
 import com.example.moviehub.navigation.Route
 
@@ -33,8 +34,13 @@ fun ProfileSelectionScreen(navController: NavController) {
             .padding(vertical = 25.dp, horizontal = 20.dp)
     ) {
         ProfileScreenHeader()
-        ProfileCard("Rakesh", "Adult")
-        ProfileCard("Rocky", "Child")
+        LazyColumn(
+            modifier = Modifier.weight(1f)
+        ) {
+            items(listOf(1)) { item ->
+                ProfileCard("Rakesh", "Adult")
+            }
+        }
         ProfileScreenFooter(navController)
     }
 }
@@ -67,8 +73,22 @@ fun ProfileScreenHeader() {
 
 @Composable
 fun ProfileScreenFooter(navController: NavController) {
-    Button(onClick = { navController.navigate(route = Route.Dashboard.name) }) {
-        Text(text = "Home")
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        CustomButton(
+            buttonType = "Primary",
+            label = "New Profile",
+            onPress = { navController.navigate(route = Route.Dashboard.name) },
+            isEnabled = false
+        )
+        CustomButton(
+            buttonType = "Secondary",
+            label = "Edit Profiles",
+            onPress = { navController.navigate(route = Route.Dashboard.name) },
+            isEnabled = false
+        )
     }
 }
 
