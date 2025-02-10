@@ -4,14 +4,19 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.example.moviehub.R
 import com.example.moviehub.models.Movie
@@ -22,27 +27,17 @@ fun MovieCard(movie: Movie) {
 
     Column(
         modifier = Modifier
-            .height(200.dp)
-            .width(200.dp)
-            .padding(start = 10.dp)
+            .padding(start = 10.dp, top = 10.dp)
             .background(color = colorResource(R.color.grey_two)),
     ) {
         Image(
             painter = rememberAsyncImagePainter(CDN_IMAGE_URL + movie.poster_path),
             contentDescription = movie.original_title,
             modifier = Modifier
-                .height(200.dp)
-                .width(200.dp)
+                .height(140.dp)
+                .width(140.dp)
                 .aspectRatio(0.5f)
         )
-//        Text(
-//            text = movie.title,
-//            color = colorResource(R.color.gold),
-//            fontWeight = FontWeight.Bold,
-//            fontSize = 16.sp,
-//            modifier = Modifier.fillMaxWidth(),
-//            textAlign = TextAlign.Center
-//        )
     }
 }
 
