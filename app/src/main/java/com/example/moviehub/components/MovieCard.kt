@@ -3,17 +3,19 @@ package com.example.moviehub.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -27,16 +29,31 @@ fun MovieCard(movie: Movie) {
 
     Column(
         modifier = Modifier
-            .padding(start = 10.dp, top = 10.dp)
+            .padding(start = 10.dp)
+            .width(100.dp)
             .background(color = colorResource(R.color.grey_two)),
+        horizontalAlignment = Alignment.Start,
     ) {
         Image(
             painter = rememberAsyncImagePainter(CDN_IMAGE_URL + movie.poster_path),
             contentDescription = movie.original_title,
+            alignment = Alignment.TopStart,
             modifier = Modifier
-                .height(140.dp)
-                .width(140.dp)
-                .aspectRatio(0.5f)
+                .height(150.dp)
+                .width(100.dp),
+            contentScale = ContentScale.FillHeight
+        )
+        Text(
+            text = movie.title,
+            color = colorResource(R.color.gold),
+            fontWeight = FontWeight.Bold,
+            fontSize = 12.sp,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 5.dp, horizontal = 1.dp),
+            textAlign = TextAlign.Center,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
         )
     }
 }
