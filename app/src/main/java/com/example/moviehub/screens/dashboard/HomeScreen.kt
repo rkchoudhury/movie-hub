@@ -21,9 +21,11 @@ fun HomeScreen() {
     val movieViewModel: MovieViewModel = viewModel()
     val viewState by movieViewModel.moviesState
 
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .background(color = colorResource(R.color.grey))) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = colorResource(R.color.grey))
+    ) {
         when {
             viewState.loading -> {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))

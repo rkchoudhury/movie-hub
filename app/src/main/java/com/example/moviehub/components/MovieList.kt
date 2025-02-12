@@ -1,9 +1,6 @@
 package com.example.moviehub.components
 
-import android.graphics.Color
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
@@ -28,10 +25,12 @@ fun MovieList(movieList: List<Movie>) {
             color = colorResource(R.color.gold),
             fontWeight = FontWeight.Bold,
             fontSize = 16.sp,
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 10.dp, bottom = 5.dp, start = 10.dp),
             textAlign = TextAlign.Left,
         )
-        LazyRow(modifier = Modifier.padding(0.dp, 25.dp, 0.dp, 0.dp)) {
+        LazyRow {
             items(movieList) { movie ->
                 MovieCard(movie)
             }

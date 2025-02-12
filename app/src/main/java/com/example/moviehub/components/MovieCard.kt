@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,11 +32,14 @@ fun MovieCard(movie: Movie) {
         modifier = Modifier
             .padding(start = 10.dp)
             .width(100.dp)
-            .background(color = colorResource(R.color.grey_two)),
+            .background(
+                color = colorResource(R.color.grey_two),
+                shape = RoundedCornerShape(bottomStart = 5.dp, bottomEnd = 5.dp)
+            ),
         horizontalAlignment = Alignment.Start,
     ) {
         Image(
-            painter = rememberAsyncImagePainter(CDN_IMAGE_URL + movie.poster_path),
+            painter = rememberAsyncImagePainter("$CDN_IMAGE_URL${movie.poster_path}"),
             contentDescription = movie.original_title,
             alignment = Alignment.TopStart,
             modifier = Modifier
@@ -50,7 +54,7 @@ fun MovieCard(movie: Movie) {
             fontSize = 12.sp,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 5.dp, horizontal = 1.dp),
+                .padding(vertical = 5.dp, horizontal = 2.dp),
             textAlign = TextAlign.Center,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
