@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
@@ -31,10 +32,10 @@ fun MovieCard(movie: Movie) {
     Column(
         modifier = Modifier
             .padding(start = 10.dp)
-            .width(100.dp)
+            .width(125.dp)
             .background(
                 color = colorResource(R.color.grey_two),
-                shape = RoundedCornerShape(bottomStart = 5.dp, bottomEnd = 5.dp)
+                shape = RoundedCornerShape(5.dp)
             ),
         horizontalAlignment = Alignment.Start,
     ) {
@@ -43,9 +44,10 @@ fun MovieCard(movie: Movie) {
             contentDescription = movie.original_title,
             alignment = Alignment.TopStart,
             modifier = Modifier
-                .height(150.dp)
-                .width(100.dp),
-            contentScale = ContentScale.FillHeight
+                .height(165.dp)
+                .width(125.dp)
+                .clip(RoundedCornerShape(topStart = 5.dp, topEnd = 5.dp)),
+            contentScale = ContentScale.FillBounds
         )
         Text(
             text = movie.title,
