@@ -13,12 +13,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.moviehub.R
 import com.example.moviehub.components.MovieList
+import com.example.moviehub.models.MovieState
+import com.example.moviehub.viewmodels.MovieCollectionViewModel
 import com.example.moviehub.viewmodels.MovieViewModel
 
 @Composable
 fun HomeScreen() {
     val movieViewModel: MovieViewModel = viewModel()
-    val viewState by movieViewModel.moviesState
+    val movieCollectionViewModel: MovieCollectionViewModel = viewModel()
+    val popularMovieState by movieViewModel.moviesState
+    val upcomingMoviesState by movieCollectionViewModel.upcomingMoviesState
+    val topRatedMoviesState by movieCollectionViewModel.topRatedMoviesState
+    val nowPlayingMoviesState by movieCollectionViewModel.nowPlayingMoviesState
 
     Box(
         modifier = Modifier
@@ -26,8 +32,15 @@ fun HomeScreen() {
             .background(color = colorResource(R.color.grey))
     ) {
         LazyColumn {
-            items(listOf(1, 2, 3, 4)) { item ->
-                MovieList(viewState.list, viewState.loading, viewState.error)
+            items(
+                listOf<MovieState>(
+                    upcomingMoviesState,
+                    popularMovieState,
+                    nowPlayingMoviesState,
+                    topRatedMoviesState
+                )
+            ) { item ->
+                MovieList(item.list, item.loading, item.error)
             }
         }
     }

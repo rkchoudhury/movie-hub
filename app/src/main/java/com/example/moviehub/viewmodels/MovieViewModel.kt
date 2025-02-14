@@ -4,20 +4,13 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.moviehub.models.Movie
+import com.example.moviehub.models.MovieState
 import com.example.moviehub.services.movieService
 import kotlinx.coroutines.launch
 
 // ViewModel takes care the communication between the data and ui
 // Prepare everything so that the ui can work with it
 class MovieViewModel: ViewModel() {
-    // This is the structure of our state to which we will update the value
-    data class MovieState(
-        val list: List<Movie> = emptyList(),
-        val loading: Boolean = true,
-        val error: String? = null
-    )
-
     // This is the private state variable which is initialized with RecipeState
     // Whenever the _moviesState value changes/updates it will trigger recomposition
     private val _moviesState = mutableStateOf(MovieState())
@@ -38,7 +31,7 @@ class MovieViewModel: ViewModel() {
     private fun fetchMovies() {
         viewModelScope.launch {
             try {
-                val response = movieService.getMovieBasedOnType()
+                val response = movieService.getPopularMovies()
                 _moviesState.value = _moviesState.value.copy(
                     list = response.results,
                     loading = false,
