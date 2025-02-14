@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moviehub.models.MovieState
+import com.example.moviehub.models.MovieType
 import com.example.moviehub.services.movieService
 import kotlinx.coroutines.launch
 
@@ -28,7 +29,8 @@ class MovieCollectionViewModel : ViewModel() {
     private fun fetchUpcomingMovies() {
         viewModelScope.launch {
             try {
-                val response = movieService.getMovieBasedOnType(type = "popular")
+                val response =
+                    movieService.getMovieBasedOnType(type = MovieType.UPCOMING.value)
                 _upcomingMoviesState.value = _upcomingMoviesState.value.copy(
                     list = response.results,
                     loading = false,
@@ -47,7 +49,8 @@ class MovieCollectionViewModel : ViewModel() {
     private fun fetchNowPlayingMovies() {
         viewModelScope.launch {
             try {
-                val response = movieService.getMovieBasedOnType(type = "now_playing")
+                val response =
+                    movieService.getMovieBasedOnType(type = MovieType.NOW_PLAYING.value)
                 _nowPlayingMoviesState.value = _nowPlayingMoviesState.value.copy(
                     list = response.results,
                     loading = false,
@@ -66,7 +69,8 @@ class MovieCollectionViewModel : ViewModel() {
     private fun fetchTopRatedMovies() {
         viewModelScope.launch {
             try {
-                val response = movieService.getMovieBasedOnType(type = "top_rated")
+                val response =
+                    movieService.getMovieBasedOnType(type = MovieType.TOP_RATED.value)
                 _topRatedMoviesState.value = _topRatedMoviesState.value.copy(
                     list = response.results,
                     loading = false,

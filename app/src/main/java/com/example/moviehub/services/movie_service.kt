@@ -22,7 +22,7 @@ interface MovieService {
         "Accept: application/json",
         "Authorization: Bearer $TOKEN",
     )
-    @GET("upcoming?language=en-US&page=1")
+    @GET("popular?language=en-US&page=1")
     suspend fun getPopularMovies(): MovieResponse
 
     @Headers(
@@ -31,9 +31,4 @@ interface MovieService {
     )
     @GET("{movie_type}?language=en-US&page=1")
     suspend fun getMovieBasedOnType(@Path("movie_type") type: String): MovieResponse
-
-//    NOW_PLAYING = "now_playing",
-//    POPULAR = "popular",
-//    TOP_RATED = "top_rated",
-//    UPCOMING = "upcoming",
 }
