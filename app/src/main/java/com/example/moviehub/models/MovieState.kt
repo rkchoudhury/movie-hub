@@ -4,5 +4,6 @@ package com.example.moviehub.models
 data class MovieState(
     val list: List<Movie> = emptyList(),
     val loading: Boolean = true,
-    val error: String? = null
+    val error: String? = null,
+    val categoryTitle: String = "",
 )

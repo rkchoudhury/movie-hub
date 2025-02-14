@@ -10,10 +10,10 @@ import kotlinx.coroutines.launch
 
 // ViewModel takes care the communication between the data and ui
 // Prepare everything so that the ui can work with it
-class MovieViewModel: ViewModel() {
+class MovieViewModel : ViewModel() {
     // This is the private state variable which is initialized with RecipeState
     // Whenever the _moviesState value changes/updates it will trigger recomposition
-    private val _moviesState = mutableStateOf(MovieState())
+    private val _moviesState = mutableStateOf(MovieState(categoryTitle = "Popular"))
 
     // This is the public variable which can be accessed from the outside
     val moviesState: State<MovieState> = _moviesState

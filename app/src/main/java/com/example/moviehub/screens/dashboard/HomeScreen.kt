@@ -40,7 +40,7 @@ fun HomeScreen() {
                     topRatedMoviesState
                 )
             ) { item ->
-                MovieList(item.list, item.loading, item.error)
+                MovieList(item.list, item.loading, item.error, item.categoryTitle)
             }
         }
     }

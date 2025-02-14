@@ -10,9 +10,9 @@ import com.example.moviehub.services.movieService
 import kotlinx.coroutines.launch
 
 class MovieCollectionViewModel : ViewModel() {
-    private val _upcomingMoviesState = mutableStateOf(MovieState())
-    private val _nowPlayingMoviesState = mutableStateOf(MovieState())
-    private val _topRatedMoviesState = mutableStateOf(MovieState())
+    private val _upcomingMoviesState = mutableStateOf(MovieState(categoryTitle = "Upcoming"))
+    private val _nowPlayingMoviesState = mutableStateOf(MovieState(categoryTitle = "Now Playing"))
+    private val _topRatedMoviesState = mutableStateOf(MovieState(categoryTitle = "Top Rated"))
 
     // This is the public variable which can be accessed from the outside
     val upcomingMoviesState: State<MovieState> = _upcomingMoviesState

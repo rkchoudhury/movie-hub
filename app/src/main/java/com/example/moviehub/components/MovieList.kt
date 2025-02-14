@@ -23,10 +23,10 @@ import com.example.moviehub.R
 import com.example.moviehub.models.Movie
 
 @Composable
-fun MovieList(movieList: List<Movie>, loading: Boolean, error: String?) {
+fun MovieList(movieList: List<Movie>, loading: Boolean, error: String?, title: String) {
     Column(modifier = Modifier.fillMaxWidth()) {
         Text(
-            text = "Popular Movies",
+            text = title,
             color = colorResource(R.color.gold),
             fontWeight = FontWeight.Bold,
             fontSize = 16.sp,
@@ -79,5 +79,5 @@ fun MovieRow(movieList: List<Movie>, loading: Boolean, error: String?) {
 @Preview
 @Composable
 fun MovieListPreview() {
-    MovieList(emptyList(), true, null)
+    MovieList(emptyList(), true, null, "")
 }
