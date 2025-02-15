@@ -1,12 +1,10 @@
 package com.example.moviehub.components
 
-import androidx.compose.foundation.background
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemColors
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -20,7 +18,9 @@ fun BottomTabBar(
 ) {
     val backStackEntry = navController.currentBackStackEntryAsState()
 
-    NavigationBar {
+    NavigationBar(
+        containerColor = colorResource(R.color.grey),
+    ) {
         navigationItems.forEachIndexed { index, item ->
             NavigationBarItem(
                 alwaysShowLabel = false,
@@ -35,7 +35,6 @@ fun BottomTabBar(
                     disabledIconColor = colorResource(R.color.grey_two),
                     disabledTextColor = colorResource(R.color.grey_two)
                 ),
-                modifier = Modifier.background(color = colorResource(R.color.grey)),
                 onClick = {
                     navController.navigate(item.route) {
                         navController.graph.startDestinationRoute?.let { route ->
