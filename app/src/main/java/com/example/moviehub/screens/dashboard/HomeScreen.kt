@@ -17,6 +17,7 @@ import com.example.moviehub.components.MoviePreviewCard
 import com.example.moviehub.models.MovieState
 import com.example.moviehub.viewmodels.MovieCollectionViewModel
 import com.example.moviehub.viewmodels.MovieViewModel
+import kotlin.random.Random
 
 @Composable
 fun HomeScreen() {
@@ -33,7 +34,8 @@ fun HomeScreen() {
             .background(color = colorResource(R.color.grey))
     ) {
         if (nowPlayingMoviesState.list.isNotEmpty()) {
-            val latestMovie = nowPlayingMoviesState.list[0]
+            val randomIndex = Random.nextInt(nowPlayingMoviesState.list.size)
+            val latestMovie = nowPlayingMoviesState.list[randomIndex]
             MoviePreviewCard(latestMovie)
         }
         LazyColumn {
