@@ -9,10 +9,14 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -80,7 +84,14 @@ fun MoviePreviewCard(movie: Movie) {
             ),
             contentPadding = PaddingValues(horizontal = 0.dp, vertical = 0.dp),
         ) {
-            Text(text = "Play", letterSpacing = 2.sp, fontWeight = FontWeight.SemiBold)
+            Icon(
+                imageVector = Icons.Rounded.PlayArrow,
+                modifier = Modifier.size(24.dp),
+                contentDescription = "play_icon",
+                tint = colorResource(R.color.black_two)
+            )
+            Spacer(modifier = Modifier.width(2.dp))
+            Text(text = "Play", fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
         }
     }
 }
