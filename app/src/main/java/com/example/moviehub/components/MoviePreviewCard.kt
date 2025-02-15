@@ -1,36 +1,24 @@
 package com.example.moviehub.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.PlayArrow
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
-import com.example.moviehub.R
 import com.example.moviehub.models.Movie
 
 @Composable
@@ -70,29 +58,7 @@ fun MoviePreviewCard(movie: Movie) {
             contentScale = ContentScale.Crop
         )
         Spacer(modifier = Modifier.height(10.dp))
-        Button(
-            onClick = {},
-            modifier = Modifier
-                .background(color = colorResource(R.color.gold), shape = RoundedCornerShape(5.dp))
-                .height(30.dp)
-                .width(100.dp),
-            colors = ButtonColors(
-                contentColor = colorResource(R.color.black_two),
-                containerColor = Color.Transparent,
-                disabledContainerColor = Color.Transparent,
-                disabledContentColor = colorResource(R.color.black_two),
-            ),
-            contentPadding = PaddingValues(horizontal = 0.dp, vertical = 0.dp),
-        ) {
-            Icon(
-                imageVector = Icons.Rounded.PlayArrow,
-                modifier = Modifier.size(24.dp),
-                contentDescription = "play_icon",
-                tint = colorResource(R.color.black_two)
-            )
-            Spacer(modifier = Modifier.width(2.dp))
-            Text(text = "Play", fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
-        }
+        IconButton(label = "Play", icon = Icons.Rounded.PlayArrow, onPress = {})
     }
 }
 

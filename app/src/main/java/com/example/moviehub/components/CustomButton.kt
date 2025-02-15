@@ -15,7 +15,12 @@ import androidx.compose.ui.unit.sp
 import com.example.moviehub.R
 
 @Composable
-fun CustomButton(buttonType: String, label: String, onPress: () -> Unit, isEnabled: Boolean = true) {
+fun CustomButton(
+    buttonType: String,
+    label: String,
+    onPress: () -> Unit,
+    isEnabled: Boolean = true
+) {
     if (buttonType == "Primary") {
         Button(
             modifier = Modifier.width(280.dp),
