@@ -2,8 +2,8 @@ package com.example.moviehub.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -23,8 +23,6 @@ import com.example.moviehub.models.Movie
 
 @Composable
 fun MoviePreviewCard(movie: Movie) {
-    val CDN_IMAGE_URL = "https://image.tmdb.org/t/p/w500/"
-
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -32,34 +30,44 @@ fun MoviePreviewCard(movie: Movie) {
             .padding(top = 10.dp, bottom = 10.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Image(
-            modifier = Modifier
-                .weight(1f)
-                .clip(
-                    RoundedCornerShape(
-                        topStart = 5.dp,
-                        topEnd = 5.dp,
-                        bottomStart = 5.dp,
-                        bottomEnd = 5.dp
-                    )
-                )
-                .border(
-                    width = 1.dp,
-                    shape = RoundedCornerShape(
-                        topStart = 5.dp,
-                        topEnd = 5.dp,
-                        bottomStart = 5.dp,
-                        bottomEnd = 5.dp
-                    ),
-                    color = Color.Red
-                ),
-            painter = rememberAsyncImagePainter("$CDN_IMAGE_URL${movie.poster_path}"),
-            contentDescription = movie.original_title,
-            contentScale = ContentScale.Crop
-        )
-        Spacer(modifier = Modifier.height(10.dp))
+        // Wrap MoviePreviewImage in a Box to manage weight properly
+        Box(modifier = Modifier
+            .weight(1f)
+            .align(Alignment.CenterHorizontally)) {
+            MoviePreviewImage(title = movie.original_title, imagePath = movie.poster_path)
+        }
         IconButton(label = "Play", icon = Icons.Rounded.PlayArrow, onPress = {})
     }
+}
+
+@Composable
+fun MoviePreviewImage(title: String, imagePath: String) {
+    val CDN_IMAGE_URL = "https://image.tmdb.org/t/p/w500/"
+
+    Image(
+        modifier = Modifier
+            .clip(
+                RoundedCornerShape(
+                    topStart = 5.dp,
+                    topEnd = 5.dp,
+                    bottomStart = 5.dp,
+                    bottomEnd = 5.dp
+                )
+            )
+            .border(
+                width = 1.dp,
+                shape = RoundedCornerShape(
+                    topStart = 5.dp,
+                    topEnd = 5.dp,
+                    bottomStart = 5.dp,
+                    bottomEnd = 5.dp
+                ),
+                color = Color.Red
+            ),
+        painter = rememberAsyncImagePainter("$CDN_IMAGE_URL$imagePath"),
+        contentDescription = title,
+        contentScale = ContentScale.Crop
+    )
 }
 
 @Preview(showSystemUi = true)
