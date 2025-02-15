@@ -2,6 +2,7 @@ package com.example.moviehub.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -49,6 +50,16 @@ fun MoviePreviewCard(movie: Movie) {
                         bottomStart = 5.dp,
                         bottomEnd = 5.dp
                     )
+                )
+                .border(
+                    width = 1.dp,
+                    shape = RoundedCornerShape(
+                        topStart = 5.dp,
+                        topEnd = 5.dp,
+                        bottomStart = 5.dp,
+                        bottomEnd = 5.dp
+                    ),
+                    color = Color.Red
                 ),
             painter = rememberAsyncImagePainter("$CDN_IMAGE_URL${movie.poster_path}"),
             contentDescription = movie.original_title,
