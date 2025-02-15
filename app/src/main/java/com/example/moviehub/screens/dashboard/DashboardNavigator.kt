@@ -1,8 +1,10 @@
 package com.example.moviehub.screens.dashboard
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -36,7 +38,9 @@ fun DashboardNavigator() {
                 )
             }
         },
-    ) {
-        DashboardTabNavigation(navController = navController)
+    ) { innerPadding ->
+        Box(modifier = Modifier.padding(PaddingValues(bottom = innerPadding.calculateBottomPadding()))) {
+            DashboardTabNavigation(navController = navController)
+        }
     }
 }
