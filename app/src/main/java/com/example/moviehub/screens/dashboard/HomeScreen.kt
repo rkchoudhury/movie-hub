@@ -7,6 +7,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -28,15 +31,20 @@ fun HomeScreen(navController: NavHostController?) {
     val upcomingMoviesState by movieCollectionViewModel.upcomingMoviesState
     val topRatedMoviesState by movieCollectionViewModel.topRatedMoviesState
     val nowPlayingMoviesState by movieCollectionViewModel.nowPlayingMoviesState
+    var latestMovieIndex by rememberSaveable { mutableIntStateOf(-1) }
+
+    if (nowPlayingMoviesState.list.isNotEmpty() && latestMovieIndex == -1) {
+        val randomIndex = Random.nextInt(nowPlayingMoviesState.list.size)
+        latestMovieIndex = randomIndex
+    }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(color = colorResource(R.color.grey))
     ) {
-        if (nowPlayingMoviesState.list.isNotEmpty()) {
-            val randomIndex = Random.nextInt(nowPlayingMoviesState.list.size)
-            val latestMovie = nowPlayingMoviesState.list[randomIndex]
+        if (latestMovieIndex != -1) {
+            val latestMovie = nowPlayingMoviesState.list[latestMovieIndex]
             MoviePreviewCard(latestMovie)
         }
         LazyColumn {
