@@ -10,7 +10,7 @@ import com.example.moviehub.models.Movie
 @Composable
 fun ViewAllMovie(title: String, movieList: List<Movie>) {
     Column {
-        Text(text = "View All Movie $title")
+        Text(text = title)
         MovieGrid(movieList)
     }
 }
