@@ -34,13 +34,13 @@ fun MovieList(
     navController: NavHostController?
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
-        MovieListHeader(title, navController)
+        MovieListHeader(title, navController, movieList)
         MovieRow(movieList, loading, error)
     }
 }
 
 @Composable
-fun MovieListHeader(title: String, navController: NavHostController?) {
+fun MovieListHeader(title: String, navController: NavHostController?, movieList: List<Movie>) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -56,10 +56,12 @@ fun MovieListHeader(title: String, navController: NavHostController?) {
         Text(
             text = "View All",
             color = colorResource(R.color.gold),
-            fontWeight = FontWeight.Bold,
+            fontWeight = FontWeight.Medium,
             fontSize = 14.sp,
             modifier = Modifier.clickable {
-                navController!!.navigate(Route.ViewAllMovie.name)
+                navController!!.currentBackStackEntry?.savedStateHandle?.set("title", title)
+                navController.currentBackStackEntry?.savedStateHandle?.set("movieList", movieList)
+                navController.navigate(Route.ViewAllMovie.name)
             }
         )
     }
