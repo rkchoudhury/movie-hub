@@ -1,5 +1,6 @@
 package com.example.moviehub.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,19 +20,27 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.moviehub.R
 import com.example.moviehub.models.Movie
+import com.example.moviehub.navigation.Route
 
 @Composable
-fun MovieList(movieList: List<Movie>, loading: Boolean, error: String?, title: String) {
+fun MovieList(
+    movieList: List<Movie>,
+    loading: Boolean,
+    error: String?,
+    title: String,
+    navController: NavHostController?
+) {
     Column(modifier = Modifier.fillMaxWidth()) {
-        MovieListHeader(title)
+        MovieListHeader(title, navController)
         MovieRow(movieList, loading, error)
     }
 }
 
 @Composable
-fun MovieListHeader(title: String) {
+fun MovieListHeader(title: String, navController: NavHostController?) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -49,6 +58,9 @@ fun MovieListHeader(title: String) {
             color = colorResource(R.color.gold),
             fontWeight = FontWeight.Bold,
             fontSize = 14.sp,
+            modifier = Modifier.clickable {
+                navController!!.navigate(Route.ViewAllMovie.name)
+            }
         )
     }
 }
@@ -93,5 +105,5 @@ fun MovieRow(movieList: List<Movie>, loading: Boolean, error: String?) {
 @Preview
 @Composable
 fun MovieListPreview() {
-    MovieList(emptyList(), true, null, "")
+    MovieList(emptyList(), true, null, "", null)
 }

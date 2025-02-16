@@ -8,10 +8,10 @@ import com.example.moviehub.screens.dashboard.HomeScreen
 import com.example.moviehub.screens.dashboard.SearchScreen
 
 @Composable
-fun DashboardTabNavigation(navController: NavHostController) {
+fun DashboardTabNavigation(navController: NavHostController, rootNavController: NavHostController) {
     NavHost(navController, startDestination = DashboardTabItem.Home.route) {
         composable(DashboardTabItem.Home.route) {
-            HomeScreen()
+            HomeScreen(rootNavController)
         }
         composable(DashboardTabItem.Search.route) {
             SearchScreen()

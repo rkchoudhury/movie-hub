@@ -14,7 +14,7 @@ fun AppNavigation() {
 
     NavHost(navController = navController, startDestination = Route.ProfileSelection.name) {
         composable(Route.ProfileSelection.name) { ProfileSelectionScreen(navController) }
-        composable(Route.Dashboard.name) { DashboardNavigator() }
+        composable(Route.Dashboard.name) { DashboardNavigator(navController) }
         composable(Route.ViewAllMovie.name) { ViewAllMovie() }
     }
 }
