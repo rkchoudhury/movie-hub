@@ -15,6 +15,8 @@ import com.example.moviehub.models.Movie
 
 @Composable
 fun MovieGrid(movieList: List<Movie>) {
+    val cardModifier = Modifier.padding(bottom = 10.dp, end = 10.dp)
+
     LazyVerticalGrid(
         columns = GridCells.Fixed(3), modifier = Modifier
             .background(
@@ -22,10 +24,10 @@ fun MovieGrid(movieList: List<Movie>) {
                     R.color.grey
                 )
             )
-            .padding(start = 20.dp, end = 20.dp, top = 10.dp)
+            .padding(start = 20.dp, end = 10.dp, top = 10.dp)
     ) {
         items(movieList) { movie: Movie ->
-            MovieCard(movie)
+            MovieCard(movie, cardModifier)
         }
     }
 }

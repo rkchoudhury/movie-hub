@@ -26,12 +26,11 @@ import com.example.moviehub.R
 import com.example.moviehub.models.Movie
 
 @Composable
-fun MovieCard(movie: Movie) {
+fun MovieCard(movie: Movie, cardModifier: Modifier) {
     val CDN_IMAGE_URL = "https://image.tmdb.org/t/p/w500/"
 
     Column(
-        modifier = Modifier
-            .padding(start = 10.dp)
+        modifier = cardModifier
             .width(125.dp)
             .background(
                 color = colorResource(R.color.grey_two),
@@ -84,5 +83,5 @@ fun MovieCardPreview() {
         vote_count = 960
     )
 
-    MovieCard(movie)
+    MovieCard(movie, cardModifier = Modifier)
 }

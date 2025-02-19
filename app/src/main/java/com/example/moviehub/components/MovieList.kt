@@ -95,9 +95,10 @@ fun MovieRow(movieList: List<Movie>, loading: Boolean, error: String?) {
         }
 
         else -> {
+            val cardModifier = Modifier.padding(start = 10.dp)
             LazyRow {
                 items(movieList) { movie ->
-                    MovieCard(movie)
+                    MovieCard(movie, cardModifier)
                 }
             }
         }
