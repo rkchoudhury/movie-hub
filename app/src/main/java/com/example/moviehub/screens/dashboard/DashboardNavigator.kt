@@ -10,6 +10,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.moviehub.components.BottomTabBar
 import com.example.moviehub.navigation.DashboardTabItem
@@ -17,7 +18,7 @@ import com.example.moviehub.navigation.DashboardTabNavigation
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun DashboardNavigator() {
+fun DashboardNavigator(rootNavController: NavHostController) {
     // Created a new Nav Controller for the Bottom Tab Navigator
     val navController = rememberNavController()
 
@@ -40,7 +41,10 @@ fun DashboardNavigator() {
         },
     ) { innerPadding ->
         Box(modifier = Modifier.padding(PaddingValues(bottom = innerPadding.calculateBottomPadding()))) {
-            DashboardTabNavigation(navController = navController)
+            DashboardTabNavigation(
+                navController = navController,
+                rootNavController = rootNavController
+            )
         }
     }
 }

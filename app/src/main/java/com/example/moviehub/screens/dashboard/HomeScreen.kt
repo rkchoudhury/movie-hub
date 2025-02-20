@@ -7,10 +7,14 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import com.example.moviehub.R
 import com.example.moviehub.components.MovieList
 import com.example.moviehub.components.MoviePreviewCard
@@ -20,22 +24,27 @@ import com.example.moviehub.viewmodels.MovieViewModel
 import kotlin.random.Random
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavHostController?) {
     val movieViewModel: MovieViewModel = viewModel()
     val movieCollectionViewModel: MovieCollectionViewModel = viewModel()
     val popularMovieState by movieViewModel.moviesState
     val upcomingMoviesState by movieCollectionViewModel.upcomingMoviesState
     val topRatedMoviesState by movieCollectionViewModel.topRatedMoviesState
     val nowPlayingMoviesState by movieCollectionViewModel.nowPlayingMoviesState
+    var latestMovieIndex by rememberSaveable { mutableIntStateOf(-1) }
+
+    if (nowPlayingMoviesState.list.isNotEmpty() && latestMovieIndex == -1) {
+        val randomIndex = Random.nextInt(nowPlayingMoviesState.list.size)
+        latestMovieIndex = randomIndex
+    }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(color = colorResource(R.color.grey))
     ) {
-        if (nowPlayingMoviesState.list.isNotEmpty()) {
-            val randomIndex = Random.nextInt(nowPlayingMoviesState.list.size)
-            val latestMovie = nowPlayingMoviesState.list[randomIndex]
+        if (latestMovieIndex != -1) {
+            val latestMovie = nowPlayingMoviesState.list[latestMovieIndex]
             MoviePreviewCard(latestMovie)
         }
         LazyColumn {
@@ -47,7 +56,7 @@ fun HomeScreen() {
                     upcomingMoviesState,
                 )
             ) { item ->
-                MovieList(item.list, item.loading, item.error, item.categoryTitle)
+                MovieList(item.list, item.loading, item.error, item.categoryTitle, navController)
             }
         }
     }
@@ -56,5 +65,5 @@ fun HomeScreen() {
 @Preview
 @Composable
 fun HomeScreenPreview() {
-    HomeScreen()
+    HomeScreen(null)
 }

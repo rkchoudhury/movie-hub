@@ -1,7 +1,9 @@
 package com.example.moviehub.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -15,27 +17,53 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.moviehub.R
 import com.example.moviehub.models.Movie
+import com.example.moviehub.navigation.Route
 
 @Composable
-fun MovieList(movieList: List<Movie>, loading: Boolean, error: String?, title: String) {
+fun MovieList(
+    movieList: List<Movie>,
+    loading: Boolean,
+    error: String?,
+    title: String,
+    navController: NavHostController?
+) {
     Column(modifier = Modifier.fillMaxWidth()) {
+        MovieListHeader(title, navController, movieList)
+        MovieRow(movieList, loading, error)
+    }
+}
+
+@Composable
+fun MovieListHeader(title: String, navController: NavHostController?, movieList: List<Movie>) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 10.dp, bottom = 5.dp, start = 10.dp, end = 10.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+    ) {
         Text(
             text = title,
             color = colorResource(R.color.gold),
             fontWeight = FontWeight.Bold,
             fontSize = 16.sp,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 10.dp, bottom = 5.dp, start = 10.dp),
-            textAlign = TextAlign.Left,
         )
-        MovieRow(movieList, loading, error)
+        Text(
+            text = "View All",
+            color = colorResource(R.color.gold),
+            fontWeight = FontWeight.Medium,
+            fontSize = 14.sp,
+            modifier = Modifier.clickable {
+                navController!!.currentBackStackEntry?.savedStateHandle?.set("title", title)
+                navController.currentBackStackEntry?.savedStateHandle?.set("movieList", movieList)
+                navController.navigate(Route.ViewAllMovie.name)
+            }
+        )
     }
 }
 
@@ -67,9 +95,10 @@ fun MovieRow(movieList: List<Movie>, loading: Boolean, error: String?) {
         }
 
         else -> {
+            val cardModifier = Modifier.padding(start = 10.dp)
             LazyRow {
                 items(movieList) { movie ->
-                    MovieCard(movie)
+                    MovieCard(movie, cardModifier)
                 }
             }
         }
@@ -79,5 +108,5 @@ fun MovieRow(movieList: List<Movie>, loading: Boolean, error: String?) {
 @Preview
 @Composable
 fun MovieListPreview() {
-    MovieList(emptyList(), true, null, "")
+    MovieList(emptyList(), true, null, "", null)
 }
