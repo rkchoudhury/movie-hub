@@ -1,6 +1,7 @@
 package com.example.moviehub.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -18,10 +19,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.moviehub.R
 
 @Composable
-fun NavigationBar(title: String) {
+fun NavigationBar(title: String, navController: NavController) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -33,7 +36,12 @@ fun NavigationBar(title: String) {
         Icon(
             imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
             contentDescription = "back_button",
-            tint = colorResource(R.color.gold)
+            tint = colorResource(R.color.gold),
+            modifier = Modifier.clickable(
+                onClick = {
+                    navController.popBackStack()
+                }
+            )
         )
         Text(
             text = title,
@@ -50,5 +58,6 @@ fun NavigationBar(title: String) {
 @Preview(showSystemUi = false, showBackground = true)
 @Composable
 fun PreviewNavigationBar() {
-    NavigationBar("Movie Preview")
+    val navController = rememberNavController()
+    NavigationBar("Movie Preview", navController)
 }
