@@ -12,7 +12,7 @@ import com.example.moviehub.models.Movie
 @Composable
 fun ViewAllMovie(title: String, movieList: List<Movie>, navController: NavController) {
     Column {
-        NavigationBar(title = title, navController)
+        NavigationBar(title = "$title Movies", navController)
         MovieGrid(movieList)
     }
 }
