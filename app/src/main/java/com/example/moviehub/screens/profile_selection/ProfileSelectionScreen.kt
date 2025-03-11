@@ -1,6 +1,5 @@
 package com.example.moviehub.screens.profile_selection
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,7 +29,6 @@ fun ProfileSelectionScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = colorResource(R.color.grey))
             .padding(vertical = 25.dp, horizontal = 20.dp)
     ) {
         ProfileScreenHeader()
