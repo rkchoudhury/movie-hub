@@ -20,9 +20,14 @@ fun ViewAllMovie(title: String, movieList: List<Movie>, navController: NavContro
 
     Column {
         NavigationBar(title = "$title Movies", navController)
-        Button(onClick = {
-            moreMovieViewModel.fetchMoreMovies()
-        }) {
+        Button(
+            onClick = {
+                if (!moreMoviesState.loading) {
+                    moreMovieViewModel.fetchMoreMovies()
+                }
+            },
+//            enabled = !moreMoviesState.loading
+        ) {
             Text(text = if (moreMoviesState.loading) "Loading..." else "Load More")
             Text(text = "  ${moreMoviesState.list.size}")
         }

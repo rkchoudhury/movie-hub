@@ -1,6 +1,7 @@
 package com.example.moviehub.viewmodels
 
 import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,23 +12,26 @@ import kotlinx.coroutines.launch
 
 class MoreMovieViewModel: ViewModel() {
     private val _moreMoviesState = mutableStateOf(MovieState(categoryTitle = "", loading = false))
+    private val _pageCount = mutableIntStateOf(2)
 
     val moreMoviesState: State<MovieState> = _moreMoviesState
 
    fun fetchMoreMovies() {
         viewModelScope.launch {
             try {
+                println("fetchMoreMovies for page: ${_pageCount.intValue}")
                 _moreMoviesState.value = _moreMoviesState.value.copy(
                     loading = true,
                 )
                 val response =
-                    movieService.getMoreMovies(type = MovieType.TOP_RATED.value, page = 2)
+                    movieService.getMoreMovies(type = MovieType.TOP_RATED.value, page = _pageCount.intValue)
                 _moreMoviesState.value = _moreMoviesState.value.copy(
                     list = response.results,
                     loading = false,
                     error = null
                 )
                 println("fetchMoreMovies response: ${_moreMoviesState.value}")
+                _pageCount.value += 1
             } catch (e: Exception) {
                 println("fetchMoreMovies error: ${e.cause} - ${e.message}")
                 _moreMoviesState.value = _moreMoviesState.value.copy(
