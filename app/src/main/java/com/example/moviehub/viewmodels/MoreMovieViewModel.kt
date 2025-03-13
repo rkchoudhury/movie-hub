@@ -11,13 +11,14 @@ import com.example.moviehub.models.MovieType
 import com.example.moviehub.services.movieService
 import kotlinx.coroutines.launch
 
-class MoreMovieViewModel(private val movies: List<Movie>): ViewModel() {
-    private val _moreMoviesState = mutableStateOf(MovieState(list = movies, categoryTitle = "", loading = false))
+class MoreMovieViewModel(private val movies: List<Movie>) : ViewModel() {
+    private val _moreMoviesState =
+        mutableStateOf(MovieState(list = movies, categoryTitle = "", loading = false))
     private val _pageCount = mutableIntStateOf(2)
 
     val moreMoviesState: State<MovieState> = _moreMoviesState
 
-   fun fetchMoreMovies() {
+    fun fetchMoreMovies() {
         viewModelScope.launch {
             try {
                 println("fetchMoreMovies for page: ${_pageCount.intValue}")
@@ -25,9 +26,14 @@ class MoreMovieViewModel(private val movies: List<Movie>): ViewModel() {
                     loading = true,
                 )
                 val response =
-                    movieService.getMoreMovies(type = MovieType.TOP_RATED.value, page = _pageCount.intValue)
+                    movieService.getMoreMovies(
+                        type = MovieType.TOP_RATED.value,
+                        page = _pageCount.intValue
+                    )
+                val allMovies = _moreMoviesState.value.list + response.results
+
                 _moreMoviesState.value = _moreMoviesState.value.copy(
-                    list = response.results,
+                    list = allMovies,
                     loading = false,
                     error = null
                 )
