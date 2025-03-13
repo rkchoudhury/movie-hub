@@ -10,12 +10,15 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.moviehub.components.MovieGrid
 import com.example.moviehub.components.NavigationBar
+import com.example.moviehub.factory.MoreMovieViewModelFactory
 import com.example.moviehub.models.Movie
 import com.example.moviehub.viewmodels.MoreMovieViewModel
 
 @Composable
 fun ViewAllMovie(title: String, movieList: List<Movie>, navController: NavController) {
-    val moreMovieViewModel: MoreMovieViewModel = viewModel()
+    val moreMovieViewModel: MoreMovieViewModel = viewModel(
+        factory = MoreMovieViewModelFactory(movieList)
+    )
     val moreMoviesState = moreMovieViewModel.moreMoviesState.value
 
     Column {
@@ -31,7 +34,7 @@ fun ViewAllMovie(title: String, movieList: List<Movie>, navController: NavContro
             Text(text = if (moreMoviesState.loading) "Loading..." else "Load More")
             Text(text = "  ${moreMoviesState.list.size}")
         }
-        MovieGrid(movieList)
+        MovieGrid(moreMoviesState.list)
     }
 }
 

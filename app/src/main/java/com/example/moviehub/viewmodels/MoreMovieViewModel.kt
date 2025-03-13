@@ -5,13 +5,14 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.moviehub.models.Movie
 import com.example.moviehub.models.MovieState
 import com.example.moviehub.models.MovieType
 import com.example.moviehub.services.movieService
 import kotlinx.coroutines.launch
 
-class MoreMovieViewModel: ViewModel() {
-    private val _moreMoviesState = mutableStateOf(MovieState(categoryTitle = "", loading = false))
+class MoreMovieViewModel(private val movies: List<Movie>): ViewModel() {
+    private val _moreMoviesState = mutableStateOf(MovieState(list = movies, categoryTitle = "", loading = false))
     private val _pageCount = mutableIntStateOf(2)
 
     val moreMoviesState: State<MovieState> = _moreMoviesState
