@@ -6,6 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 private const val BASE_URL = "https://api.themoviedb.org/3/movie/"
 
@@ -31,4 +32,14 @@ interface MovieService {
     )
     @GET("{movie_type}?language=en-US&page=1")
     suspend fun getMovieBasedOnType(@Path("movie_type") type: String): MovieResponse
+
+    @Headers(
+        "Accept: application/json",
+        "Authorization: Bearer $TOKEN",
+    )
+    @GET("{movie_type}?language=en-US")
+    suspend fun getMoreMovies(
+        @Path("movie_type") type: String,
+        @Query("page") page: Int
+    ): MovieResponse
 }
