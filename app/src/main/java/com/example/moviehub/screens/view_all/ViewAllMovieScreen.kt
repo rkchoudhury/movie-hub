@@ -2,14 +2,11 @@ package com.example.moviehub.screens.view_all
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
@@ -48,23 +45,24 @@ fun ViewAllMovie(
 }
 
 @Composable
-fun LoadMoreCard(moreMoviesState: MovieState, moreMovieViewModel: MoreMovieViewModel, movieType: String) {
+fun LoadMoreCard(
+    moreMoviesState: MovieState,
+    moreMovieViewModel: MoreMovieViewModel,
+    movieType: String
+) {
     Column(
         modifier = Modifier
-            .width(125.dp)
-            .height(177.dp)
             .border(
                 width = 1.dp,
                 color = colorResource(R.color.gold),
                 shape = RoundedCornerShape(5.dp)
             )
+            .padding(all = 10.dp)
             .clickable {
                 if (!moreMoviesState.loading) {
                     moreMovieViewModel.fetchMoreMovies(movieType)
                 }
             },
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
     ) {
         Text(
             text = if (moreMoviesState.loading) "Loading..." else "Load More",
