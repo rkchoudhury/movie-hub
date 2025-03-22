@@ -22,7 +22,10 @@ fun AppNavigation() {
             val movieList =
                 navController.previousBackStackEntry?.savedStateHandle?.get<List<Movie>>("movieList")
                     ?: emptyList()
-            ViewAllMovie(title, movieList, navController)
+            val movieType =
+                navController.previousBackStackEntry?.savedStateHandle?.get<String>("movieType")
+                    ?: ""
+            ViewAllMovie(title, movieList, navController, movieType)
         }
     }
 }

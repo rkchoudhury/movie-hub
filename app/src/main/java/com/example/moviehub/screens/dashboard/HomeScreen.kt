@@ -52,7 +52,8 @@ fun HomeScreen(navController: NavHostController?) {
                     upcomingMoviesState,
                 )
             ) { item ->
-                MovieList(item.list, item.loading, item.error, item.categoryTitle, navController)
+                val (list, loading, error, categoryTitle, type) = item
+                MovieList(list, loading, error, categoryTitle, navController, type)
             }
         }
     }

@@ -24,10 +24,16 @@ import com.example.moviehub.components.NavigationBar
 import com.example.moviehub.factory.MoreMovieViewModelFactory
 import com.example.moviehub.models.Movie
 import com.example.moviehub.models.MovieState
+import com.example.moviehub.models.MovieType
 import com.example.moviehub.viewmodels.MoreMovieViewModel
 
 @Composable
-fun ViewAllMovie(title: String, movieList: List<Movie>, navController: NavController) {
+fun ViewAllMovie(
+    title: String,
+    movieList: List<Movie>,
+    navController: NavController,
+    movieType: String
+) {
     val moreMovieViewModel: MoreMovieViewModel = viewModel(
         factory = MoreMovieViewModelFactory(movieList)
     )
@@ -36,13 +42,13 @@ fun ViewAllMovie(title: String, movieList: List<Movie>, navController: NavContro
     Column {
         NavigationBar(title = "$title Movies", navController)
         MovieGrid(moreMoviesState.list) {
-            LoadMoreCard(moreMoviesState, moreMovieViewModel)
+            LoadMoreCard(moreMoviesState, moreMovieViewModel, movieType)
         }
     }
 }
 
 @Composable
-fun LoadMoreCard(moreMoviesState: MovieState, moreMovieViewModel: MoreMovieViewModel) {
+fun LoadMoreCard(moreMoviesState: MovieState, moreMovieViewModel: MoreMovieViewModel, movieType: String) {
     Column(
         modifier = Modifier
             .width(125.dp)
@@ -54,7 +60,7 @@ fun LoadMoreCard(moreMoviesState: MovieState, moreMovieViewModel: MoreMovieViewM
             )
             .clickable {
                 if (!moreMoviesState.loading) {
-                    moreMovieViewModel.fetchMoreMovies()
+                    moreMovieViewModel.fetchMoreMovies(movieType)
                 }
             },
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -72,5 +78,5 @@ fun LoadMoreCard(moreMoviesState: MovieState, moreMovieViewModel: MoreMovieViewM
 @Composable
 fun ViewAllMoviePreview() {
     val navController = rememberNavController()
-    ViewAllMovie("Movie", emptyList(), navController)
+    ViewAllMovie("Movie", emptyList(), navController, MovieType.POPULAR.value)
 }

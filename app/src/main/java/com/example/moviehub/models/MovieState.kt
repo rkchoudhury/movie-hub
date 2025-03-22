@@ -6,4 +6,5 @@ data class MovieState(
     val loading: Boolean = true,
     val error: String? = null,
     val categoryTitle: String = "",
+    val type: String = "",
 )
