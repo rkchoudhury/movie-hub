@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.moviehub.R
 import com.example.moviehub.models.Movie
+import com.example.moviehub.models.MovieType
 import com.example.moviehub.navigation.Route
 
 @Composable
@@ -31,16 +32,22 @@ fun MovieList(
     loading: Boolean,
     error: String?,
     title: String,
-    navController: NavHostController?
-) {
+    navController: NavHostController?,
+    movieType: String,
+    ) {
     Column(modifier = Modifier.fillMaxWidth()) {
-        MovieListHeader(title, navController, movieList)
+        MovieListHeader(title, navController, movieList, movieType)
         MovieRow(movieList, loading, error)
     }
 }
 
 @Composable
-fun MovieListHeader(title: String, navController: NavHostController?, movieList: List<Movie>) {
+fun MovieListHeader(
+    title: String,
+    navController: NavHostController?,
+    movieList: List<Movie>,
+    movieType: String
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -61,6 +68,7 @@ fun MovieListHeader(title: String, navController: NavHostController?, movieList:
             modifier = Modifier.clickable {
                 navController!!.currentBackStackEntry?.savedStateHandle?.set("title", title)
                 navController.currentBackStackEntry?.savedStateHandle?.set("movieList", movieList)
+                navController.currentBackStackEntry?.savedStateHandle?.set("movieType", movieType)
                 navController.navigate(Route.ViewAllMovie.name)
             }
         )
@@ -108,5 +116,5 @@ fun MovieRow(movieList: List<Movie>, loading: Boolean, error: String?) {
 @Preview
 @Composable
 fun MovieListPreview() {
-    MovieList(emptyList(), true, null, "", null)
+    MovieList(emptyList(), true, null, "", null, MovieType.POPULAR.value)
 }

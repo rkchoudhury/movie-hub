@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moviehub.models.MovieState
+import com.example.moviehub.models.MovieType
 import com.example.moviehub.services.movieService
 import kotlinx.coroutines.launch
 
@@ -13,7 +14,8 @@ import kotlinx.coroutines.launch
 class MovieViewModel : ViewModel() {
     // This is the private state variable which is initialized with RecipeState
     // Whenever the _moviesState value changes/updates it will trigger recomposition
-    private val _moviesState = mutableStateOf(MovieState(categoryTitle = "Popular"))
+    private val _moviesState =
+        mutableStateOf(MovieState(categoryTitle = "Popular", type = MovieType.POPULAR.value))
 
     // This is the public variable which can be accessed from the outside
     val moviesState: State<MovieState> = _moviesState
