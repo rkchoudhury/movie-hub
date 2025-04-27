@@ -34,10 +34,10 @@ fun MovieList(
     title: String,
     navController: NavHostController?,
     movieType: String,
-    ) {
+) {
     Column(modifier = Modifier.fillMaxWidth()) {
         MovieListHeader(title, navController, movieList, movieType)
-        MovieRow(movieList, loading, error)
+        MovieRow(movieList, loading, error, navController)
     }
 }
 
@@ -76,7 +76,12 @@ fun MovieListHeader(
 }
 
 @Composable
-fun MovieRow(movieList: List<Movie>, loading: Boolean, error: String?) {
+fun MovieRow(
+    movieList: List<Movie>,
+    loading: Boolean,
+    error: String?,
+    navController: NavHostController?
+) {
     when {
         loading -> {
             Column(
@@ -106,7 +111,7 @@ fun MovieRow(movieList: List<Movie>, loading: Boolean, error: String?) {
             val cardModifier = Modifier.padding(start = 10.dp)
             LazyRow {
                 items(movieList) { movie ->
-                    MovieCard(movie, cardModifier)
+                    MovieCard(movie, cardModifier, navController)
                 }
             }
         }
