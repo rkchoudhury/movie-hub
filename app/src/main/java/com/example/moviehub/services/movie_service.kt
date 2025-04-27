@@ -50,6 +50,6 @@ interface MovieService {
     )
     @GET("{movie_id}?language=en-US")
     suspend fun getMovieDetails(
-        @Path("movie_id") type: String,
+        @Path("movie_id") type: Int,
     ): MovieDetailsResponse
 }
