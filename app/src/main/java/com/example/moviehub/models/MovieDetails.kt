@@ -1,6 +1,6 @@
 package com.example.moviehub.models
 
-data class MovieInfo(
+data class MovieDetails(
     val adult: Boolean,
     val backdrop_path: String,
     val budget: Double,

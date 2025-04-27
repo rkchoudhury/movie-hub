@@ -1,6 +1,6 @@
 package com.example.moviehub.services
 
-import com.example.moviehub.models.MovieInfo
+import com.example.moviehub.models.MovieDetails
 import com.example.moviehub.models.MovieResponse
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -51,5 +51,5 @@ interface MovieService {
     @GET("{movie_id}?language=en-US")
     suspend fun getMovieDetails(
         @Path("movie_id") movieId: Int,
-    ): MovieInfo
+    ): MovieDetails
 }

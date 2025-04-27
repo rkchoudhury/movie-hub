@@ -23,7 +23,7 @@ class MovieDetailsViewModel(): ViewModel() {
                 val response = movieService.getMovieDetails(movieId = 950387);
                 println("fetchMovieDetails response: $response")
                 _movieDetailsState.value = _movieDetailsState.value.copy(
-                    movieInfo = response,
+                    movieDetails = response,
                     loading = false,
                     error = null,
                 )
