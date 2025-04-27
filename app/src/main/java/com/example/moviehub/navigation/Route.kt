@@ -6,4 +6,5 @@ sealed class Route(val name: String) {
     data object Home: Route("Home")
     data object Search: Route("Search")
     data object ViewAllMovie: Route("ViewAllMovie")
+    data object MovieDetails: Route("MovieDetails")
 }

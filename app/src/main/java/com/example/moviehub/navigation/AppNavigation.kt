@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.moviehub.models.Movie
 import com.example.moviehub.screens.dashboard.DashboardNavigator
+import com.example.moviehub.screens.movie_details.MovieDetailsScreen
 import com.example.moviehub.screens.profile_selection.ProfileSelectionScreen
 import com.example.moviehub.screens.view_all.ViewAllMovie
 
@@ -13,7 +14,7 @@ import com.example.moviehub.screens.view_all.ViewAllMovie
 fun AppNavigation() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = Route.ProfileSelection.name) {
+    NavHost(navController = navController, startDestination = Route.Dashboard.name) {
         composable(Route.ProfileSelection.name) { ProfileSelectionScreen(navController) }
         composable(Route.Dashboard.name) { DashboardNavigator(navController) }
         composable(Route.ViewAllMovie.name) {
@@ -27,5 +28,6 @@ fun AppNavigation() {
                     ?: ""
             ViewAllMovie(title, movieList, navController, movieType)
         }
+        composable(Route.MovieDetails.name) { MovieDetailsScreen() }
     }
 }
