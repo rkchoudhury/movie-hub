@@ -1,5 +1,6 @@
 package com.example.moviehub.screens.movie_details
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
@@ -15,12 +16,14 @@ import com.example.moviehub.components.NavigationBar
 import com.example.moviehub.viewmodels.MovieDetailsViewModel
 
 @Composable
-fun MovieDetailsScreen(navController: NavController) {
-    val movieDetailsViewModel: MovieDetailsViewModel = viewModel()
-    val movieDetailsState by movieDetailsViewModel.movieDetailsState
+fun MovieDetailsScreen(navController: NavController, movieId: Int, title: String) {
+//    val movieDetailsViewModel: MovieDetailsViewModel = viewModel()
+//    val movieDetailsState by movieDetailsViewModel.movieDetailsState
+
+    Log.d("RKK", "MovieDetailsScreen: $movieId")
 
     Column {
-        NavigationBar(title = "", navController)
+        NavigationBar(title, navController)
         Text(
             text = "Movie Details",
             textAlign = TextAlign.Center,
@@ -33,5 +36,5 @@ fun MovieDetailsScreen(navController: NavController) {
 @Composable
 fun MovieDetailsScreenPreview() {
     val navController = rememberNavController()
-    MovieDetailsScreen(navController)
+    MovieDetailsScreen(navController, -1, "Good Days")
 }

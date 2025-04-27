@@ -28,6 +28,12 @@ fun AppNavigation() {
                     ?: ""
             ViewAllMovie(title, movieList, navController, movieType)
         }
-        composable(Route.MovieDetails.name) { MovieDetailsScreen(navController) }
+        composable(Route.MovieDetails.name) {
+            val movieId =
+                navController.previousBackStackEntry?.savedStateHandle?.get<Int>("id") ?: -1
+            val title =
+                navController.previousBackStackEntry?.savedStateHandle?.get<String>("title") ?: ""
+            MovieDetailsScreen(navController, movieId, title)
+        }
     }
 }

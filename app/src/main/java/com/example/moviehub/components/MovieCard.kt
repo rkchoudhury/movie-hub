@@ -40,7 +40,9 @@ fun MovieCard(movie: Movie, cardModifier: Modifier, navController: NavController
                 shape = RoundedCornerShape(5.dp)
             )
             .clickable {
-                navController?.navigate(Route.MovieDetails.name)
+                navController!!.currentBackStackEntry?.savedStateHandle?.set("id", movie.id)
+                navController.currentBackStackEntry?.savedStateHandle?.set("title", movie.title)
+                navController.navigate(Route.MovieDetails.name)
             },
         horizontalAlignment = Alignment.Start,
     ) {

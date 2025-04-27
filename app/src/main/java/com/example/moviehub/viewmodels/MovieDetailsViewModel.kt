@@ -8,19 +8,18 @@ import com.example.moviehub.models.MovieDetailsState
 import com.example.moviehub.services.movieService
 import kotlinx.coroutines.launch
 
-class MovieDetailsViewModel(): ViewModel() {
+class MovieDetailsViewModel(private val movieId: Int): ViewModel() {
     private val _movieDetailsState = mutableStateOf(MovieDetailsState())
     val movieDetailsState: State<MovieDetailsState> = _movieDetailsState
-    private val movieId: Int = 950387
 
     init {
         fetchMovieDetails()
     }
-
+gi
     private fun fetchMovieDetails() {
         viewModelScope.launch {
             try {
-                val response = movieService.getMovieDetails(movieId = 950387);
+                val response = movieService.getMovieDetails(movieId = movieId);
                 println("fetchMovieDetails response: $response")
                 _movieDetailsState.value = _movieDetailsState.value.copy(
                     movieDetails = response,
