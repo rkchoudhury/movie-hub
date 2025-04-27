@@ -14,7 +14,7 @@ import com.example.moviehub.screens.view_all.ViewAllMovie
 fun AppNavigation() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = Route.Dashboard.name) {
+    NavHost(navController = navController, startDestination = Route.ProfileSelection.name) {
         composable(Route.ProfileSelection.name) { ProfileSelectionScreen(navController) }
         composable(Route.Dashboard.name) { DashboardNavigator(navController) }
         composable(Route.ViewAllMovie.name) {
