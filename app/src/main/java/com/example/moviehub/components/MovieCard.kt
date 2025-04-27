@@ -2,6 +2,7 @@ package com.example.moviehub.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -21,12 +22,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.moviehub.R
 import com.example.moviehub.models.Movie
+import com.example.moviehub.navigation.Route
 
 @Composable
-fun MovieCard(movie: Movie, cardModifier: Modifier) {
+fun MovieCard(movie: Movie, cardModifier: Modifier, navController: NavController?) {
     val CDN_IMAGE_URL = "https://image.tmdb.org/t/p/w500/"
 
     Column(
@@ -35,7 +38,12 @@ fun MovieCard(movie: Movie, cardModifier: Modifier) {
             .background(
                 color = colorResource(R.color.grey_two),
                 shape = RoundedCornerShape(5.dp)
-            ),
+            )
+            .clickable {
+                navController!!.currentBackStackEntry?.savedStateHandle?.set("id", movie.id)
+                navController.currentBackStackEntry?.savedStateHandle?.set("title", movie.title)
+                navController.navigate(Route.MovieDetails.name)
+            },
         horizontalAlignment = Alignment.Start,
     ) {
         Image(
@@ -83,5 +91,5 @@ fun MovieCardPreview() {
         vote_count = 960
     )
 
-    MovieCard(movie, cardModifier = Modifier)
+    MovieCard(movie, cardModifier = Modifier, null)
 }

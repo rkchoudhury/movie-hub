@@ -1,5 +1,6 @@
 package com.example.moviehub.services
 
+import com.example.moviehub.models.MovieDetails
 import com.example.moviehub.models.MovieResponse
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -42,4 +43,13 @@ interface MovieService {
         @Path("movie_type") type: String,
         @Query("page") page: Int
     ): MovieResponse
+
+    @Headers(
+        "Accept: application/json",
+        "Authorization: Bearer $TOKEN",
+    )
+    @GET("{movie_id}?language=en-US")
+    suspend fun getMovieDetails(
+        @Path("movie_id") movieId: Int,
+    ): MovieDetails
 }

@@ -8,10 +8,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.moviehub.models.Movie
 
 @Composable
-fun MovieGrid(movieList: List<Movie>, content: @Composable () -> Unit = {}) {
+fun MovieGrid(movieList: List<Movie>, navController: NavController?, content: @Composable () -> Unit = {}) {
     val cardModifier = Modifier.padding(bottom = 10.dp, end = 10.dp)
 
     LazyVerticalGrid(
@@ -20,7 +21,7 @@ fun MovieGrid(movieList: List<Movie>, content: @Composable () -> Unit = {}) {
             .padding(start = 20.dp, end = 10.dp, top = 10.dp)
     ) {
         items(movieList) { movie: Movie ->
-            MovieCard(movie, cardModifier)
+            MovieCard(movie, cardModifier, navController)
         }
         item {
             content()
@@ -31,5 +32,5 @@ fun MovieGrid(movieList: List<Movie>, content: @Composable () -> Unit = {}) {
 @Preview
 @Composable
 fun MovieGridPreview() {
-    MovieGrid(emptyList())
+    MovieGrid(movieList = emptyList(), navController = null)
 }

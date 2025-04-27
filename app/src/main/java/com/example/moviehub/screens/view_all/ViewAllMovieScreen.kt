@@ -43,7 +43,7 @@ fun ViewAllMovie(
 
     Column {
         NavigationBar(title = "$title Movies", navController)
-        MovieGrid(moreMoviesState.list) {
+        MovieGrid(moreMoviesState.list, navController) {
             LoadMoreCard(moreMoviesState, moreMovieViewModel, movieType)
         }
     }

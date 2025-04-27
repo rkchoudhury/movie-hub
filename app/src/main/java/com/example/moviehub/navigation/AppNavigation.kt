@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.moviehub.models.Movie
 import com.example.moviehub.screens.dashboard.DashboardNavigator
+import com.example.moviehub.screens.movie_details.MovieDetailsScreen
 import com.example.moviehub.screens.profile_selection.ProfileSelectionScreen
 import com.example.moviehub.screens.view_all.ViewAllMovie
 
@@ -26,6 +27,13 @@ fun AppNavigation() {
                 navController.previousBackStackEntry?.savedStateHandle?.get<String>("movieType")
                     ?: ""
             ViewAllMovie(title, movieList, navController, movieType)
+        }
+        composable(Route.MovieDetails.name) {
+            val movieId =
+                navController.previousBackStackEntry?.savedStateHandle?.get<Int>("id") ?: -1
+            val title =
+                navController.previousBackStackEntry?.savedStateHandle?.get<String>("title") ?: ""
+            MovieDetailsScreen(navController, movieId, title)
         }
     }
 }
