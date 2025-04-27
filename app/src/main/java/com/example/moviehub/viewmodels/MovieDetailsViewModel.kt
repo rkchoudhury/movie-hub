@@ -15,7 +15,7 @@ class MovieDetailsViewModel(private val movieId: Int): ViewModel() {
     init {
         fetchMovieDetails()
     }
-gi
+
     private fun fetchMovieDetails() {
         viewModelScope.launch {
             try {
