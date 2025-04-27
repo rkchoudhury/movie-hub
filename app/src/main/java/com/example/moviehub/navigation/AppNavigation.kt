@@ -28,6 +28,6 @@ fun AppNavigation() {
                     ?: ""
             ViewAllMovie(title, movieList, navController, movieType)
         }
-        composable(Route.MovieDetails.name) { MovieDetailsScreen() }
+        composable(Route.MovieDetails.name) { MovieDetailsScreen(navController) }
     }
 }
