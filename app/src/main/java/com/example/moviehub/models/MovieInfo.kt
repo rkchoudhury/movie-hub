@@ -50,7 +50,3 @@ data class ProductionCompany(
     val name: String,
     val origin_country: String,
 )
-
-data class MovieDetailsResponse(
-    val response: MovieInfo
-)
